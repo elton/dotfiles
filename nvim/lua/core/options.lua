@@ -1,3 +1,5 @@
+local global = require('core.global')
+
 local options = {
   backup = false,                          -- creates a backup file
   swapfile = false,                        -- creates a swapfile
@@ -5,7 +7,7 @@ local options = {
   cmdheight = 1,                           -- more space in the neovim command line for displaying messages
   completeopt = { "menuone", "noselect" }, -- mostly just for cmp
   conceallevel = 2,                        -- if set to 0 so that `` is visible in markdown files
-	concealcursor = "",                      -- show hiding character at cursor line
+	concealcursor = "niv",                   -- show hiding character at cursor line
   fileencoding = "utf-8",                  -- the encoding written to a file
   hlsearch = true,                         -- highlight all matches on previous search pattern
   ignorecase = true,                       -- ignore case in search patterns
@@ -29,9 +31,12 @@ local options = {
   autoindent = true,                       -- Copy indent from current line when starting a new line
   number = true,                           -- set numbered lines
   relativenumber = true,                   -- set relative numbered lines
+  colorcolumn = "80",
   numberwidth = 4,                         -- set number column width to 2 {default 4}
   signcolumn = "yes",                      -- always show the sign column, otherwise it would shift the text each time
   wrap = false,                            -- display lines as one long line
+  whichwrap = "h,l,<,>,[,],~",
+  linebreak = true,
   scrolloff = 8,                           -- is one of my fav
   sidescrolloff = 8,
   showbreak = "↳  ",
@@ -64,3 +69,19 @@ end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+if global.is_mac then
+  vim.g.clipboard = {
+    name = "macOS-clipboard",
+    copy = {
+      ["+"] = "pbcopy",
+      ["*"] = "pbcopy",
+    },
+    paste = {
+      ["+"] = "pbpaste",
+      ["*"] = "pbpaste",
+    },
+    cache_enabled = 0
+  }
+  vim.g.python3_host_prog = '/opt/homebrew/bin/python3'
+end

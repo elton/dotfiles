@@ -85,8 +85,8 @@ return packer.startup(function(use)
 
   -- Colorschemes
   -- use 'folke/tokyonight.nvim'
-  use "shaunsingh/nord.nvim"
-
+  -- use "shaunsingh/nord.nvim"
+  use "marko-cerovac/material.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -94,6 +94,13 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
+  use 'nvim-lua/plenary.nvim'
+  use {
+  'David-Kunz/cmp-npm',
+  requires = {
+    'nvim-lua/plenary.nvim'
+  }
+}
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine

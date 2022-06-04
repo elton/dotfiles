@@ -48,14 +48,13 @@ return packer.startup(function(use)
   use "rcarriga/nvim-notify" -- notify
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua" -- file explore
-  use "akinsho/bufferline.nvim"
-  use "moll/vim-bbye"
+  use "akinsho/bufferline.nvim" -- tab
+  -- use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim" -- status line
-  use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"  -- project manager
+  use "ahmedkhalf/project.nvim" -- project manager
   use "lukas-reineke/indent-blankline.nvim" -- indent blankline
   use "goolord/alpha-nvim" -- welcome page
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+  -- use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "kevinhwang91/nvim-bqf" -- better quick fix
   use "folke/todo-comments.nvim" -- todo comments
@@ -68,15 +67,15 @@ return packer.startup(function(use)
   }
   use "j-hui/fidget.nvim" -- show lsp progress
   use "simeji/winresizer"
+
   -- litee family
   use {
-    "ldelossa/litee.nvim",
-    commit = "47235cb807a83af866e06ce654b28efcfe347c60"
+    "ldelossa/litee.nvim", -- a library for building "IDE-lite" experiences in Neovim.
   }
   use {
     "ldelossa/litee-calltree.nvim",
-    commit = "3f3c25e584558949b1eda38ded76eade28fa5fd6"
   }
+
   -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists.
   use {
     "folke/trouble.nvim",
@@ -106,21 +105,19 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
-  use "jsfaint/gen_tags.vim"
+  use "hrsh7th/cmp-calc"
+  use "hrsh7th/cmp-emoji"
+  -- use "jsfaint/gen_tags.vim"
   use "ray-x/cmp-treesitter"
   use "f3fora/cmp-spell" -- spell check
-  -- use "github/copilot.vim"  -- Copilot setup,
-  -- use {
-  --   "tzachar/cmp-tabnine", -- use ":CmpTabnineHub" command to login
-  --   after = "nvim-cmp",
-  --   run = 'bash ./install.sh',
-  -- }
+  use "github/copilot.vim" -- Github copilot for nvim. invoke :Copilot setup
 
   use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
   use "nvim-pack/nvim-spectre" -- search and replace pane
 
   use "tpope/vim-repeat" --  . command enhance
   use "tpope/vim-surround" -- vim surround
+  use "akinsho/toggleterm.nvim" -- toggle terminal
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -131,7 +128,6 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "kosayoda/nvim-lightbulb" -- code action
   use "ray-x/lsp_signature.nvim" -- show function signature when typing
-  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use {
     "folke/lsp-colors.nvim",
     config = function()
@@ -142,7 +138,6 @@ return packer.startup(function(use)
         Hint = "#10B981"
       })
     end
-
   } -- LSP diagnostics highlight groups for color schemes
 
   use "RRethy/vim-illuminate" -- highlight undercursor word
@@ -177,37 +172,28 @@ return packer.startup(function(use)
   -- use "mfussenegger/nvim-dap-python"    -- debug python
   -- use { "leoluz/nvim-dap-go", module = "dap-go" } -- debug golang
   use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
-  use {
-    "sakhnik/nvim-gdb",
-    run = "./install.sh"
-  }
+  -- use {
+  --   "sakhnik/nvim-gdb",
+  --   run = "./install.sh"
+  -- }
 
   -- Git
   -- Show git information in neovim
   use "lewis6991/gitsigns.nvim"
   use 'sindrets/diffview.nvim'
-  use {
-    "kdheepak/lazygit.nvim",
-    setup = function()
-      vim.g.lazygit_floating_window_winblend = 0
-      vim.g.lazygit_floating_window_scaling_factor = 1
-      vim.g.lazygit_floating_window_corner_chars = {
-        "╭",
-        "╮",
-        "╰",
-        "╯",
-      }
-      vim.g.lazygit_floating_window_use_plenary = 0
-      vim.g.lazygit_use_neovim_remote = 1
-      if vim.g.lazygit_use_neovim_remote == 1 and vim.fn.executable("nvr") then
-        vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
-      end
-    end,
-    cmd = "LazyGit",
-  }
 
   -- tools
   use "Pocco81/AutoSave.nvim"
+  use "djoshea/vim-autoread"
+  use "lewis6991/spellsitter.nvim" -- spell checker
+  use "voldikss/vim-translator"
+  use "mtdl9/vim-log-highlighting"
+  use "vim-test/vim-test"
+  use {
+    "rcarriga/vim-ultest",
+    run = ":UpdateRemotePlugins"
+  }
+  use { 'michaelb/sniprun', run = 'bash ./install.sh' }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

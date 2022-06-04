@@ -5,6 +5,8 @@ require "core.colorscheme"
 require "core.utils"
 
 require "core.conf"
+require "core.lsp"
+require "core.dap"
 
 --[[ require "core.lsp" ]]
 --[[ require "core.telescope" ]]

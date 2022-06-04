@@ -41,20 +41,11 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
-  -- speed up neovim!
-  use {
-    "nathom/filetype.nvim",
-    config = function()
-      require("filetype").setup({
-        -- overrides the filetype or function for filetype
-        -- See https://github.com/nathom/filetype.nvim#customization
-        overrides = {},
-      })
-    end,
-  }
   use "wbthomason/packer.nvim" -- Have packer manage itself
+  use "lewis6991/impatient.nvim" -- Speed up loading Lua modules    TODO: figure out how to use this
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+  use "rcarriga/nvim-notify" -- notify
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
@@ -94,13 +85,12 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  use 'nvim-lua/plenary.nvim'
   use {
-  'David-Kunz/cmp-npm',
-  requires = {
-    'nvim-lua/plenary.nvim'
+    'David-Kunz/cmp-npm',
+    requires = {
+      'nvim-lua/plenary.nvim'
+    }
   }
-}
 
   -- snippets
   use "L3MON4D3/LuaSnip" --snippet engine
@@ -111,23 +101,42 @@ return packer.startup(function(use)
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
-  use "folke/lsp-colors.nvim" -- LSP diagnostics highlight groups for color schemes
+  use {
+    "folke/lsp-colors.nvim",
+    config = function()
+      require("lsp-colors").setup({
+        Error = "#db4b4b",
+        Warning = "#e0af68",
+        Information = "#0db9d7",
+        Hint = "#10B981"
+      })
+    end
+
+  } -- LSP diagnostics highlight groups for color schemes
   use "RRethy/vim-illuminate" -- automatically highlighting other uses of the current word under the cursor
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
+  }
+
+  use "nvim-telescope/telescope-ui-select.nvim"
+  use "nvim-telescope/telescope-rg.nvim"
+  use "MattesGroeger/vim-bookmarks"
+  use "tom-anders/telescope-vim-bookmarks.nvim"
+  use "nvim-telescope/telescope-dap.nvim"
 
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   }
+  use "nvim-treesitter/nvim-treesitter-textobjects"
   use "nvim-treesitter/nvim-treesitter-context"
+  use "andymass/vim-matchup"
   use "JoosepAlviste/nvim-ts-context-commentstring"
-  use {
-    "SmiteshP/nvim-gps",
-    requires = "nvim-treesitter/nvim-treesitter"
-  }
 
   -- Git
   -- Show git information in neovim

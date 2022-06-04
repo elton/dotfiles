@@ -47,26 +47,36 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "rcarriga/nvim-notify" -- notify
   use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
+  use "kyazdani42/nvim-tree.lua" -- file explore
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
-  use "nvim-lualine/lualine.nvim"
+  use "nvim-lualine/lualine.nvim" -- status line
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"  -- project manager
   use "lukas-reineke/indent-blankline.nvim" -- indent blankline
-  use "goolord/alpha-nvim"
+  use "goolord/alpha-nvim" -- welcome page
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
+  use "kevinhwang91/nvim-bqf" -- better quick fix
+  use "folke/todo-comments.nvim" -- todo comments
+  use "simrat39/symbols-outline.nvim" -- outline
+  -- use "stevearc/aerial.nvim"
+  use "norcalli/nvim-colorizer.lua" -- show color
   use {
     "phaazon/hop.nvim", -- like easymotion, but more powerful
     branch = "v1", -- optional but strongly recommended
   }
-
-  -- Editor enhance
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "terrortylor/nvim-comment"
-  use "Shatur/neovim-session-manager"
-
+  use "j-hui/fidget.nvim" -- show lsp progress
+  use "simeji/winresizer"
+  -- litee family
+  use {
+    "ldelossa/litee.nvim",
+    commit = "47235cb807a83af866e06ce654b28efcfe347c60"
+  }
+  use {
+    "ldelossa/litee-calltree.nvim",
+    commit = "3f3c25e584558949b1eda38ded76eade28fa5fd6"
+  }
   -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists.
   use {
     "folke/trouble.nvim",
@@ -79,6 +89,11 @@ return packer.startup(function(use)
       }
     end
   }
+
+  -- Editor enhance
+  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+  use "terrortylor/nvim-comment"
+  use "Shatur/neovim-session-manager"
 
   -- Colorschemes
   use "marko-cerovac/material.nvim"
@@ -170,6 +185,7 @@ return packer.startup(function(use)
   -- Git
   -- Show git information in neovim
   use "lewis6991/gitsigns.nvim"
+  use 'sindrets/diffview.nvim'
   use {
     "kdheepak/lazygit.nvim",
     setup = function()
@@ -189,6 +205,9 @@ return packer.startup(function(use)
     end,
     cmd = "LazyGit",
   }
+
+  -- tools
+  use "Pocco81/AutoSave.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

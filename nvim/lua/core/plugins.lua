@@ -46,21 +46,27 @@ return packer.startup(function(use)
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "rcarriga/nvim-notify" -- notify
-  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
-  use "numToStr/Comment.nvim" -- Easily comment stuff
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
   use "akinsho/toggleterm.nvim"
-  use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
-  use "lukas-reineke/indent-blankline.nvim"
+  use "ahmedkhalf/project.nvim"  -- project manager
+  use "lukas-reineke/indent-blankline.nvim" -- indent blankline
   use "goolord/alpha-nvim"
   use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
-  use "tpope/vim-surround"
+  use {
+    "phaazon/hop.nvim", -- like easymotion, but more powerful
+    branch = "v1", -- optional but strongly recommended
+  }
+
+  -- Editor enhance
+  use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
+  use "terrortylor/nvim-comment"
+  use "Shatur/neovim-session-manager"
+
   -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists.
   use {
     "folke/trouble.nvim",
@@ -75,9 +81,8 @@ return packer.startup(function(use)
   }
 
   -- Colorschemes
-  -- use 'folke/tokyonight.nvim'
-  -- use "shaunsingh/nord.nvim"
   use "marko-cerovac/material.nvim"
+
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -85,22 +90,33 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
-  use {
-    'David-Kunz/cmp-npm',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    }
-  }
+  use "hrsh7th/cmp-nvim-lua"
+  use "jsfaint/gen_tags.vim"
+  use "ray-x/cmp-treesitter"
+  use "f3fora/cmp-spell" -- spell check
+  -- use "github/copilot.vim"  -- Copilot setup,
+  -- use {
+  --   "tzachar/cmp-tabnine", -- use ":CmpTabnineHub" command to login
+  --   after = "nvim-cmp",
+  --   run = 'bash ./install.sh',
+  -- }
 
-  -- snippets
+  use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
+  use "nvim-pack/nvim-spectre" -- search and replace pane
+
+  use "tpope/vim-repeat" --  . command enhance
+  use "tpope/vim-surround" -- vim surround
+
+  -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine
   use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- LSP
   use "neovim/nvim-lspconfig" -- enable LSP
   use "williamboman/nvim-lsp-installer" -- simple to use language server installer
-  use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
-  use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
+  use "kosayoda/nvim-lightbulb" -- code action
+  use "ray-x/lsp_signature.nvim" -- show function signature when typing
+  -- use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use {
     "folke/lsp-colors.nvim",
     config = function()
@@ -113,7 +129,8 @@ return packer.startup(function(use)
     end
 
   } -- LSP diagnostics highlight groups for color schemes
-  use "RRethy/vim-illuminate" -- automatically highlighting other uses of the current word under the cursor
+
+  use "RRethy/vim-illuminate" -- highlight undercursor word
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -121,7 +138,6 @@ return packer.startup(function(use)
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   }
-
   use "nvim-telescope/telescope-ui-select.nvim"
   use "nvim-telescope/telescope-rg.nvim"
   use "MattesGroeger/vim-bookmarks"
@@ -135,8 +151,21 @@ return packer.startup(function(use)
   }
   use "nvim-treesitter/nvim-treesitter-textobjects"
   use "nvim-treesitter/nvim-treesitter-context"
-  use "andymass/vim-matchup"
-  use "JoosepAlviste/nvim-ts-context-commentstring"
+  -- use "andymass/vim-matchup"
+  -- use "JoosepAlviste/nvim-ts-context-commentstring"
+
+  -- Debugger
+  use "ravenxrz/DAPInstall.nvim" -- help us install several debuggers
+  use "ravenxrz/nvim-dap"
+  use "theHamsta/nvim-dap-virtual-text"
+  use "rcarriga/nvim-dap-ui"
+  -- use "mfussenegger/nvim-dap-python"    -- debug python
+  -- use { "leoluz/nvim-dap-go", module = "dap-go" } -- debug golang
+  use { "jbyuki/one-small-step-for-vimkind", module = "osv" } -- debug any Lua code running in a Neovim instance
+  use {
+    "sakhnik/nvim-gdb",
+    run = "./install.sh"
+  }
 
   -- Git
   -- Show git information in neovim

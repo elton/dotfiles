@@ -137,7 +137,7 @@ return packer.startup(function(use)
     end
   } -- LSP diagnostics highlight groups for color schemes
 
-  use "RRethy/vim-illuminate" -- highlight undercursor word
+  -- use "RRethy/vim-illuminate" -- highlight undercursor word
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
@@ -182,8 +182,8 @@ return packer.startup(function(use)
   -- tools
   use "Pocco81/AutoSave.nvim"
   use "djoshea/vim-autoread"
-  use "lewis6991/spellsitter.nvim" -- spell checker
-  use "voldikss/vim-translator"
+  -- use "lewis6991/spellsitter.nvim" -- spell checker
+  -- use "voldikss/vim-translator"
   use "mtdl9/vim-log-highlighting"
   use "vim-test/vim-test"
   use {

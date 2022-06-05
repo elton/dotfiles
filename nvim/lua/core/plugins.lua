@@ -53,12 +53,12 @@ return packer.startup(function(use)
   use "nvim-lualine/lualine.nvim" -- status line
   use "ahmedkhalf/project.nvim" -- project manager
   use "lukas-reineke/indent-blankline.nvim" -- indent blankline
-  use "goolord/alpha-nvim" -- welcome page
+  -- use "goolord/alpha-nvim" -- welcome page
   -- use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
   use "folke/which-key.nvim"
   use "kevinhwang91/nvim-bqf" -- better quick fix
   use "folke/todo-comments.nvim" -- todo comments
-  use "simrat39/symbols-outline.nvim" -- outline
+  -- use "simrat39/symbols-outline.nvim" -- outline
   -- use "stevearc/aerial.nvim"
   use "norcalli/nvim-colorizer.lua" -- show color
   use {
@@ -72,12 +72,8 @@ return packer.startup(function(use)
   use 'wakatime/vim-wakatime'
 
   -- litee family
-  use {
-    "ldelossa/litee.nvim", -- a library for building "IDE-lite" experiences in Neovim.
-  }
-  use {
-    "ldelossa/litee-calltree.nvim",
-  }
+  use "ldelossa/litee.nvim" -- a library for building "IDE-lite" experiences in Neovim. }
+  use "ldelossa/litee-calltree.nvim"
 
   -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists.
   use {
@@ -98,8 +94,8 @@ return packer.startup(function(use)
   use "Shatur/neovim-session-manager"
 
   -- Colorschemes
-  use "marko-cerovac/material.nvim"
-
+  -- use "marko-cerovac/material.nvim"
+  use "shaunsingh/nord.nvim"
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -108,11 +104,9 @@ return packer.startup(function(use)
   use "saadparwaiz1/cmp_luasnip" -- snippet completions
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
-  use "hrsh7th/cmp-calc"
   use "hrsh7th/cmp-emoji"
   -- use "jsfaint/gen_tags.vim"
   use "ray-x/cmp-treesitter"
-  use "f3fora/cmp-spell" -- spell check
   use "github/copilot.vim" -- Github copilot for nvim. invoke :Copilot setup
 
   use "ethanholz/nvim-lastplace" -- auto return back to the last modified positon when open a file
@@ -120,7 +114,7 @@ return packer.startup(function(use)
 
   use "tpope/vim-repeat" --  . command enhance
   use "tpope/vim-surround" -- vim surround
-  use "akinsho/toggleterm.nvim" -- toggle terminal
+  -- use "akinsho/toggleterm.nvim" -- toggle terminal
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine

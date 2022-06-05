@@ -68,6 +68,9 @@ return packer.startup(function(use)
   use "j-hui/fidget.nvim" -- show lsp progress
   use "simeji/winresizer"
 
+  -- wakatime
+  use 'wakatime/vim-wakatime'
+
   -- litee family
   use {
     "ldelossa/litee.nvim", -- a library for building "IDE-lite" experiences in Neovim.

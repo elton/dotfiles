@@ -31,6 +31,7 @@ end
 
 -- Have packer use a popup window
 packer.init {
+  max_jobs=50,
   display = {
     open_fn = function()
       return require("packer.util").float { border = "rounded" }
@@ -114,7 +115,7 @@ return packer.startup(function(use)
 
   use "tpope/vim-repeat" --  . command enhance
   use "tpope/vim-surround" -- vim surround
-  -- use "akinsho/toggleterm.nvim" -- toggle terminal
+  use "akinsho/toggleterm.nvim" -- toggle terminal
 
   -- Snippets
   use "L3MON4D3/LuaSnip" --snippet engine

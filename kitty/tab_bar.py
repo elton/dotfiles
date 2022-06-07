@@ -1,6 +1,7 @@
 # pyright: reportMissingImports=false
 
 import datetime
+import locale
 import json
 import subprocess
 from collections import defaultdict
@@ -92,18 +93,29 @@ def _draw_right_status(screen: Screen, is_last: bool) -> int:
         return 0
 
     draw_attributed_string(Formatter.reset, screen)
-    date = datetime.datetime.now().strftime(" %H:%M")
-    utc_date = datetime.datetime.now(datetime.timezone.utc).strftime(" (UTC %H:%M)")
+    time = datetime.datetime.now().strftime(" %H:%M")
+    weekday = datetime.datetime.now().strftime(" %a,")
+    date = datetime.datetime.now().strftime(" %b %d %y")
+    separator = " ⋮"
+    # cmd = 'pmset -g batt | grep -Eo "\d+%" | cut -f1'
+    # ps = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    # battery = "  " + ps.communicate()[0].decode("utf-8") 
+    locale.setlocale(locale.LC_TIME, "en_US")
 
-    right_status_length = calc_draw_spaces(date + " " + utc_date + " ")
+    # utc_date = datetime.datetime.now(datetime.timezone.utc).strftime(" (UTC %H:%M)")
+
+    right_status_length = calc_draw_spaces(time + " " + separator + " " + weekday + " " + date + " ")
 
     draw_spaces = screen.columns - screen.cursor.x - right_status_length
     if draw_spaces > 0:
         screen.draw(" " * draw_spaces)
 
     cells = [
-        (Color(135, 192, 149), date),
-        (Color(113, 115, 116), utc_date),
+        # (color(217,202,172), battery),
+        (Color(135, 192, 149), time),
+        (Color(238, 238, 238), separator),
+        (Color(113,115,116), weekday),
+        (Color(168,168,168), date),
     ]
 
     screen.cursor.fg = 0
@@ -135,7 +147,7 @@ def draw_tab(
     is_last: bool,
     extra_data: ExtraData,
 ) -> int:
-    _draw_icon(screen, index, symbol="  \uf490 Elton  ")
+    _draw_icon(screen, index, symbol=" \uf490 elton ")
     _draw_left_status(
         draw_data,
         screen,

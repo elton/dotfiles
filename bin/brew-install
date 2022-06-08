@@ -1,0 +1,69 @@
+#!/bin/bash
+
+if [[ -z $XDG_DATA_HOME ]]; then
+  export XDG_DATA_HOME="$HOME/.local/share"
+fi
+if [[ -z $XDG_CONFIG_HOME ]]; then
+  export XDG_CONFIG_HOME="$HOME/.config"
+fi
+
+[[ -f "${XDG_CONFIG_HOME}/zsh/lib/helpers.zsh" ]] && source "${XDG_CONFIG_HOME}/zsh/lib/helpers.zsh"
+
+set -euo pipefail
+
+# -- set some useful vars for executable info:
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
+__base="$(basename ${__file} .sh)"
+__root="$(cd "$(dirname "${__dir}")" && pwd)"
+# shellcheck disable=SC2034,SC2015
+__invocation="$(printf %q "${__file}")$( (($#)) && printf ' %q' "$@" || true)"
+
+FORCE_INSTALL="false"
+
+while getopts "f" OPTION; do
+  case $OPTION in
+
+    f)
+      FORCE_INSTALL="true"
+      ;;
+
+    \?)
+      echo "Invalid Option: -$OPTARG" 1>&2
+      exit 1
+      ;;
+
+  esac
+done
+shift $((OPTIND - 1))
+
+do_install() {
+  log "installing brew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+    && log_ok "completed installing brew" \
+    || exit 1
+}
+
+if [[ $(type "brew" &>/dev/null) && $FORCE_INSTALL == "false" ]]; then
+  # if [[ $(type "brew" &>/dev/null) ]]; then
+  log_warn "brew already installed; skipping"
+else
+
+  #   if [[ $FORCE_INSTALL == "false" ]]; then
+  read -p "$(tput bold)$(tput setaf 5)[?] force install brew anyway (y/N)?$(tput sgr 0) " yn
+  case $yn in
+    [Yy]*)
+      do_install || exit 1
+      ;;
+    "")
+      log_warn "skipping; opted out of brew install"
+      ;;
+    [Nn]*)
+      log_warn "skipping; opted out of brew install"
+      ;;
+    *)
+      log_warn "please answer [y]es or [n]o."
+      exec $__invocation
+      ;;
+  esac
+fi

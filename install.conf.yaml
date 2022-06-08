@@ -1,0 +1,60 @@
+# https://github.com/radekmorytko/dotfiles/blob/master/dotbot.conf.yaml
+# https://github.com/duncz/dotfiles
+# https://github.com/tagoro9/dotfiles
+# https://github.com/evantravers/dotfiles/blob/master/Makefile
+# https://github.com/anishathalye/dotbot#configuration
+# https://github.com/sleekybadger/dotfiles
+# https://github.com/btmccollum/dotfiles/blob/master/install.conf.yaml
+# https://github.com/DmitryOtroshchenko/Dotfiles/blob/master/install/bootstrap-mac.sh
+# https://github.com/adamcstephens/dotfiles/blob/main/install.conf.yaml
+# https://github.com/jamesstidard/dotfiles/blob/master/install (great!)
+
+# REF: https://stackoverflow.com/questions/3258243/check-if-pull-needed-in-git
+# REF: https://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script
+
+- defaults:
+    link:
+      create: true
+      relink: true
+    shell:
+      stdout: true
+      stderr: true
+      stdin: true
+    brewfile:
+      stdout: true
+      stderr: true
+      stdin: true
+      include: ["tap", "brew", "cask", "mas"]
+
+- create:
+    - ~/code
+    - ~/tmp
+    - ~/screenshots
+    - ~/.config
+    - ~/.cache
+    - ~/.cache/zsh
+    - ~/.local/state
+    - ~/.local/share/packages
+    - ~/.local/share/src
+    - ~/.ssh
+
+- shell:
+    - description: Installing Submodules..
+      quiet: true
+      command: >-
+        git submodule update --init --recursive;
+
+    - description: Attempting to install Homebrew..
+      quiet: true
+      command: >-
+        make -C ~/.dotfiles brew;
+
+    - description: Attempting to install ASDF..
+      quiet: true
+      command: >-
+        make -C ~/.dotfiles asdf;
+
+- link:
+    ~/.config/zsh:
+        force: true
+        path: config/zsh

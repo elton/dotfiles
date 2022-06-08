@@ -58,3 +58,21 @@
     ~/.config/zsh:
         force: true
         path: config/zsh
+    ~/.config/kitty:
+      force: true
+      if: "[ `uname` = Darwin ]"
+      path: config/kitty
+    ~/.config/nvim:
+      force: true
+      path: config/nvim
+    
+    # ----- git
+    ~/.gitmessage:
+      force: true
+      path: git/gitmessage
+    ~/.gitignore_global:
+      force: true
+      path: git/gitignore_global
+    ~/.gitconfig:
+      force: true
+      path: git/gitconfig

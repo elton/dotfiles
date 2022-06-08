@@ -2,6 +2,14 @@
 
 set -e
 
+# Check script is being executed appropriatly
+if [[ -z ${BASH_SOURCE} ]]; then
+  msg='This file should be executed directly with `./install`
+  and not interpreted with `sh ./install`'
+  echo "$msg"
+  exit 1
+fi
+
 CONFIG="install.conf.yaml"
 DOTBOT_DIR="dotbot"
 
@@ -12,4 +20,7 @@ cd "${BASEDIR}"
 git -C "${DOTBOT_DIR}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_DIR}"
 
-"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
+"${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" \
+  --plugin-dir dotbot-asdf \
+  --plugin-dir dotbot-brewfile \
+  -c "${CONFIG}" "${@}"

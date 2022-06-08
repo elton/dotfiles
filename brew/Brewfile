@@ -1,0 +1,30 @@
+#!/usr/bin/env zsh
+
+## --- DOCS
+#
+# How to install older versions:
+# - https://stackoverflow.com/questions/62032757/install-a-previous-version-of-chromedriver-with-brew/62765875#62765875
+# - https://stackoverflow.com/questions/62785290/installing-previous-versions-of-a-formula-with-brew-extract
+
+# -- taps --
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "neovim/neovim"
+
+# -- cli --
+brew "ansible" if OS.mac?
+brew "curl"
+
+# -- casks --
+cask_args appdir: "/Applications"
+
+tap "homebrew/cask-versions" if OS.mac?
+tap "homebrew/cask" if OS.mac?
+tap "homebrew/cask-fonts" if OS.mac?
+tap "homebrew/cask-drivers" if OS.mac?
+
+# - fonts
+cask "font-jetbrains-mono"
+cask "font-jetbrains-mono-nerd-font"
+cask "font-ia-writer-quattro"
+cask "font-victor-mono-nerd-font"

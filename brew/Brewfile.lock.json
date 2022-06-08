@@ -1,0 +1,157 @@
+{
+  "entries": {
+    "tap": {
+      "homebrew/bundle": {
+        "revision": "f93f4a78aa22081ecd313333f35f211cc782ec9b"
+      },
+      "homebrew/services": {
+        "revision": "7ca25997ef98c0c02f8d4694c535751fa0c8e835"
+      },
+      "neovim/neovim": {
+        "revision": "e587b5c90456a895a11bc5ae81e5cfdde6b23dd4"
+      },
+      "homebrew/cask-versions": {
+        "revision": "71aabd3b8c2f4f8352f2cf6a2601bb3dee98a05d"
+      },
+      "homebrew/cask": {
+        "revision": "8ddac76280c9ebe45b1f2fba6fb7163710e1fb40"
+      },
+      "homebrew/cask-fonts": {
+        "revision": "2fab390cbf9c427d58477bd9d25e2dc96cfaad2c"
+      },
+      "homebrew/cask-drivers": {
+        "revision": "29d9e83e39684a53d1cf7ef577bff42ea0f486b7"
+      }
+    },
+    "brew": {
+      "curl": {
+        "version": "7.83.1",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:de6b8150f5f89e6fa4341428c3d957de2dc4a127b0ce79ba74b118b5d44e2fd2",
+              "sha256": "de6b8150f5f89e6fa4341428c3d957de2dc4a127b0ce79ba74b118b5d44e2fd2"
+            },
+            "arm64_big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:aca944aebbd9cf46016f68833d7039490e26c56ec6d2c672bca78b3b9b4d1ca0",
+              "sha256": "aca944aebbd9cf46016f68833d7039490e26c56ec6d2c672bca78b3b9b4d1ca0"
+            },
+            "monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:47943f6b96dd8d3ecc88a6975a94babc8ec93854e390c5713a8b25d7c915994f",
+              "sha256": "47943f6b96dd8d3ecc88a6975a94babc8ec93854e390c5713a8b25d7c915994f"
+            },
+            "big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:0b9d8bcd39a0a634562dc62c791e65fa77f3cb264c7196713fab45e72ffac9d9",
+              "sha256": "0b9d8bcd39a0a634562dc62c791e65fa77f3cb264c7196713fab45e72ffac9d9"
+            },
+            "catalina": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:23f58afae9b3715bfaf87a13b61d85e3f38e1beeee129f02002f76dc0d8c9360",
+              "sha256": "23f58afae9b3715bfaf87a13b61d85e3f38e1beeee129f02002f76dc0d8c9360"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/curl/blobs/sha256:647aee913233bc3299656f9c97554511740aa5e1fb80934ac73b977fb78b9875",
+              "sha256": "647aee913233bc3299656f9c97554511740aa5e1fb80934ac73b977fb78b9875"
+            }
+          }
+        }
+      },
+      "ansible": {
+        "version": "5.8.0",
+        "bottle": {
+          "rebuild": 0,
+          "root_url": "https://ghcr.io/v2/homebrew/core",
+          "files": {
+            "arm64_monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:699dc425f7abaaf761ac42a69dd7126ff305fb9f762cfdf131746fe30902071b",
+              "sha256": "699dc425f7abaaf761ac42a69dd7126ff305fb9f762cfdf131746fe30902071b"
+            },
+            "arm64_big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:4a94fd14bdb592b97e672270be761060abcddc3ccd5e740e1e22c36aa78fb717",
+              "sha256": "4a94fd14bdb592b97e672270be761060abcddc3ccd5e740e1e22c36aa78fb717"
+            },
+            "monterey": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:71a6e1dcf79cedc0e74eb0e951ffe98c8bc3defdc0cef2c6564c5fbf8e3ac6b0",
+              "sha256": "71a6e1dcf79cedc0e74eb0e951ffe98c8bc3defdc0cef2c6564c5fbf8e3ac6b0"
+            },
+            "big_sur": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:3ae5ecdc5ce1c3415b54709ee81e99523b21c58764794f709292c914e017b375",
+              "sha256": "3ae5ecdc5ce1c3415b54709ee81e99523b21c58764794f709292c914e017b375"
+            },
+            "catalina": {
+              "cellar": ":any",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:96bc492eef5dad53c38d1d45af8734dc43b52308ac4ad721cbf905e6c94782c9",
+              "sha256": "96bc492eef5dad53c38d1d45af8734dc43b52308ac4ad721cbf905e6c94782c9"
+            },
+            "x86_64_linux": {
+              "cellar": ":any_skip_relocation",
+              "url": "https://ghcr.io/v2/homebrew/core/ansible/blobs/sha256:3d0ea6559a7476e59463c84934599a9b5018e0b74daa1a146d9cf21705a4ec0a",
+              "sha256": "3d0ea6559a7476e59463c84934599a9b5018e0b74daa1a146d9cf21705a4ec0a"
+            }
+          }
+        }
+      }
+    },
+    "cask": {
+      "font-jetbrains-mono": {
+        "version": "2.242",
+        "options": {
+          "full_name": "font-jetbrains-mono",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "font-jetbrains-mono-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-jetbrains-mono-nerd-font",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "font-ia-writer-quattro": {
+        "version": "latest",
+        "options": {
+          "full_name": "font-ia-writer-quattro",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      },
+      "font-victor-mono-nerd-font": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-victor-mono-nerd-font",
+          "args": {
+            "appdir": "/Applications"
+          }
+        }
+      }
+    }
+  },
+  "system": {
+    "macos": {
+      "monterey": {
+        "HOMEBREW_VERSION": "3.5.1",
+        "HOMEBREW_PREFIX": "/opt/homebrew",
+        "Homebrew/homebrew-core": "2f0919e0991b4faaae02e15621bce964113e633a",
+        "CLT": "13.4.0.0.1.1651278267",
+        "Xcode": "13.4.1",
+        "macOS": "12.4"
+      }
+    }
+  }
+}

@@ -1,9 +1,9 @@
 local M = {}
 
-local ends_with = require("core.utils").ends_with
+local ends_with = require("elton.utils").ends_with
 
 M.setup = function()
-  local config_dir = vim.fn.stdpath('config') .. '/lua/core/conf'
+  local config_dir = vim.fn.stdpath('config') .. '/lua/elton/conf'
   -- plugins do not need to load, NOTE: no .lua suffix required
   local unload_plugins = {
     "init", -- we don't need to load init again
@@ -36,7 +36,7 @@ M.setup = function()
     if ends_with(fname, ".lua") then
       local cut_suffix_fname = fname:sub(1, #fname - #'.lua')
       if helper_set[cut_suffix_fname] == nil then
-        local file = "core.conf." .. cut_suffix_fname
+        local file = "elton.conf." .. cut_suffix_fname
         local status_ok, _ = pcall(require, file)
         if not status_ok then
           vim.notify('Failed loading ' .. fname, vim.log.levels.ERROR)

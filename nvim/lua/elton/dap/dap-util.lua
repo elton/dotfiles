@@ -3,8 +3,8 @@ local dap = require 'dap'
 
 -- refresh config
 M.reload_continue = function()
-  package.loaded['core.dap.dap-config'] = nil
-  require('core.dap.dap-config').setup()
+  package.loaded['elton.dap.dap-config'] = nil
+  require('elton.dap.dap-config').setup()
   dap.continue()
 end
 
@@ -62,7 +62,7 @@ end
 -- persist breakpoint
 local bp_base_dir = os.getenv("HOME") .. "/.cache/dap-breakpoint/"
 local breakpoints = require('dap.breakpoints')
-local utils = require("core.utils")
+local utils = require("elton.utils")
 
 function M.store_breakpoints()
   if not utils.exists(bp_base_dir) then

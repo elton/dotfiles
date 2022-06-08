@@ -2,7 +2,7 @@
 local path = require 'nvim-lsp-installer.path'
 local install_root_dir = path.concat { vim.fn.stdpath 'data', 'lsp_servers' }
 
-local lsp_handlers = require 'core.lsp.handlers'
+local lsp_handlers = require 'elton.lsp.handlers'
 
 require 'navigator'.setup({
   debug = true, -- log output, set to true and log path: ~/.cache/nvim/gh.log

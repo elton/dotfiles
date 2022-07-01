@@ -354,7 +354,7 @@ fzf = !"                                                                        
 	autoStash = true
 
 [pull]
-	rebase = true
+	rebase = false
 	ff = only
 
 [rerere]
@@ -482,3 +482,5 @@ fzf = !"                                                                        
   selected = normal
   separator = red bold
   linenumber = normal
+[credential]
+	helper = store

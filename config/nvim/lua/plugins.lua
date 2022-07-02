@@ -94,7 +94,6 @@ packer.startup({
 		use("onsails/lspkind-nvim")
 		use("tami5/lspsaga.nvim")
 		-- 代码格式化
-		use("mhartington/formatter.nvim")
 		use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
 		-- JSON 增强
 		use("b0o/schemastore.nvim")
@@ -114,6 +113,7 @@ packer.startup({
 		use("windwp/nvim-autopairs")
 		-- git
 		use({ "lewis6991/gitsigns.nvim" })
+		use({ "sindrets/diffview.nvim" })
 		-- vimspector
 		use("puremourning/vimspector")
 		----------------------------------------------

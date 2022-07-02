@@ -24,6 +24,7 @@ require("plugin-config.surround")
 require("plugin-config.indent-blankline")
 require("plugin-config.toggleterm")
 require("plugin-config.nvim-colorizer")
+require("plugin-config.diffview")
 
 -- 内置LSP
 require("lsp.setup")

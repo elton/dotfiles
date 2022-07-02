@@ -65,6 +65,12 @@ packer.startup({
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
 		use("lukas-reineke/indent-blankline.nvim")
+		-- show color
+		use("norcalli/nvim-colorizer.lua")
+		-- wakatime
+		use("wakatime/vim-wakatime")
+		-- Copilot
+		use("github/copilot.vim")
 		--------------------- LSP --------------------
 		use({ "williamboman/nvim-lsp-installer" })
 		-- Lspconfig
@@ -135,7 +141,7 @@ packer.startup({
 		-- 以浮动窗口打开安装列表
 		display = {
 			open_fn = function()
-				return require("packer.util").float({ border = "single" })
+				return require("packer.util").float({ border = "rounded" })
 			end,
 		},
 	},

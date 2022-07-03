@@ -1,30 +1,26 @@
--- 基础设置
-require("basic")
 -- 快捷键映射
 require("keybindings")
 -- Packer 插件管理
-require("plugins")
+require("plugins").setup()
 -- 主题设置
 require("colorscheme")
--- 自动命令
-require("autocmds")
 -- 插件配置
-require("plugin-config.nvim-tree")
-require("plugin-config.bufferline")
-require("plugin-config.lualine")
-require("plugin-config.telescope")
-require("plugin-config.dashboard")
-require("plugin-config.project")
-require("plugin-config.nvim-treesitter")
-require("plugin-config.comment")
-require("plugin-config.fidget")
-require("plugin-config.gitsigns")
-require("plugin-config.nvim-autopairs")
-require("plugin-config.surround")
-require("plugin-config.indent-blankline")
-require("plugin-config.toggleterm")
-require("plugin-config.nvim-colorizer")
-require("plugin-config.diffview")
+require("config.nvim-tree")
+require("config.bufferline")
+require("config.lualine")
+require("config.telescope")
+require("config.dashboard")
+require("config.project")
+require("config.nvim-treesitter")
+require("config.comment")
+require("config.fidget")
+require("config.gitsigns")
+require("config.nvim-autopairs")
+require("config.surround")
+require("config.indent-blankline")
+require("config.toggleterm")
+require("config.nvim-colorizer")
+require("config.diffview")
 
 -- 内置LSP
 require("lsp.setup")

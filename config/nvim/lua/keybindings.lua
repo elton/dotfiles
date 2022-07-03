@@ -6,10 +6,6 @@
 --   term_mode = "t",
 --   command_mode = "c",
 
--- leader key 为空
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opt = {
 	noremap = true,
 	silent = true,
@@ -17,6 +13,11 @@ local opt = {
 
 -- 本地变量
 local map = vim.api.nvim_set_keymap
+
+-- leader key 为空格
+map("", "<Space>", "<Nop>", opt)
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 -- Press jl fast to enter
 map("i", "jk", "<ESC>", opt)

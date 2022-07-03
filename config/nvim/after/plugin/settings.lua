@@ -38,7 +38,7 @@ function M.auto_cmds()
 	-- 保存时自动格式化
 	autocmd("BufWritePre", {
 		group = myAutoGroup,
-		pattern = { "*.lua", "*.py", "*.sh", "*.go", "*.js", "*.java", "*.rs" },
+		pattern = { "*.lua", "*.py", "*.go", "*.js", "*.java", "*.rs" },
 		callback = vim.lsp.buf.format({ async = true }),
 	})
 

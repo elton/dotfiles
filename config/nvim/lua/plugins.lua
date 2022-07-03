@@ -41,7 +41,7 @@ function M.setup()
 	end
 
 	local conf = {
-		compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
+		-- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
 		-- 并发数限制
 		max_jobs = 16,
 		-- 以浮动窗口打开安装列表
@@ -53,9 +53,11 @@ function M.setup()
 	}
 
 	local function plugins(use)
+		-- Performence
 		use("lewis6991/impatient.nvim")
 		-- Packer 可以管理自己本身
 		use("wbthomason/packer.nvim")
+
 		--------------------- colorschemes --------------------
 		-- tokyonight
 		use("folke/tokyonight.nvim")
@@ -75,17 +77,52 @@ function M.setup()
 			end,
 		})
 		-- nvim-tree
-		use({ "kyazdani42/nvim-tree.lua", requires = "kyazdani42/nvim-web-devicons" })
+		use({
+			"kyazdani42/nvim-tree.lua",
+			requires = "kyazdani42/nvim-web-devicons",
+			event = "BufWinEnter",
+			config = function()
+				require("nvim-tree").setup()
+			end,
+		})
 		-- bufferline
-		use({ "akinsho/bufferline.nvim", requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" } })
+		use({
+			"akinsho/bufferline.nvim",
+			requires = { "kyazdani42/nvim-web-devicons", "moll/vim-bbye" },
+			event = "BufReadPre",
+			config = function()
+				require("config.bufferline").setup()
+			end,
+		})
+
+		use({
+			"SmiteshP/nvim-gps",
+			module = "nvim-gps",
+			config = function()
+				require("nvim-gps").setup()
+			end,
+		})
 		-- lualine
-		use({ "nvim-lualine/lualine.nvim", requires = { "kyazdani42/nvim-web-devicons" } })
-		use("arkav/lualine-lsp-progress")
+		use({
+			"nvim-lualine/lualine.nvim",
+			after = "nvim-treesitter",
+			requires = { "kyazdani42/nvim-web-devicons" },
+			config = function()
+				require("config.lualine").setup()
+			end,
+		})
 		-- telescope
-		use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
-		-- telescope extensions
-		use("LinArcX/telescope-env.nvim")
-		use("nvim-telescope/telescope-ui-select.nvim")
+		use({
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"LinArcX/telescope-env.nvim",
+				"nvim-telescope/telescope-ui-select.nvim",
+			},
+			config = function()
+				require("config.telescope").setup()
+			end,
+		})
 		-- dashboard-nvim
 		use("glepnir/dashboard-nvim")
 		-- project
@@ -136,7 +173,7 @@ function M.setup()
 		-------------------------------------------------------
 		use({ "akinsho/toggleterm.nvim" })
 		-- surround
-		use("ur4ltz/surround.nvim", event)
+		use("ur4ltz/surround.nvim")
 		-- Comment
 		use("numToStr/Comment.nvim")
 		-- nvim-autopairs
@@ -149,8 +186,21 @@ function M.setup()
 				require("config.neogit").setup()
 			end,
 		})
-		use({ "lewis6991/gitsigns.nvim" })
-		use({ "sindrets/diffview.nvim" })
+		use({
+			"lewis6991/gitsigns.nvim",
+			config = function()
+				require("gitsigns").setup()
+			end,
+		})
+		use({
+			"sindrets/diffview.nvim",
+			cmd = {
+				"DiffviewOpen",
+				"DiffviewClose",
+				"DiffviewToggleFiles",
+				"DiffviewFocusFiles",
+			},
+		})
 		-- vimspector
 		use("puremourning/vimspector")
 		----------------------------------------------

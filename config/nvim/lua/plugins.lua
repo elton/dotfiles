@@ -112,21 +112,37 @@ function M.setup()
 			end,
 		})
 		-- telescope
+		use("nvim-lua/popup.nvim")
 		use({
 			"nvim-telescope/telescope.nvim",
 			requires = {
 				"nvim-lua/plenary.nvim",
 				"LinArcX/telescope-env.nvim",
 				"nvim-telescope/telescope-ui-select.nvim",
+				"nvim-telescope/telescope-media-files.nvim",
 			},
 			config = function()
 				require("config.telescope").setup()
 			end,
 		})
 		-- dashboard-nvim
-		use("glepnir/dashboard-nvim")
+		-- use("glepnir/dashboard-nvim")
+		-- alpha-nvim
+		use({
+			"goolord/alpha-nvim",
+			config = function()
+				require("config.alpha").setup()
+			end,
+		})
+
 		-- project
-		use("ahmedkhalf/project.nvim")
+		use({
+			"ahmedkhalf/project.nvim",
+			event = "VimEnter",
+			config = function()
+				require("config.project").setup()
+			end,
+		})
 		-- treesitter
 		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 		use("p00f/nvim-ts-rainbow")

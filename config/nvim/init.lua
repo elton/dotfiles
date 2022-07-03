@@ -5,8 +5,6 @@ require("plugins").setup()
 -- 主题设置
 require("colorscheme")
 -- 插件配置
-require("config.dashboard")
-require("config.project")
 require("config.nvim-treesitter")
 require("config.comment")
 require("config.fidget")

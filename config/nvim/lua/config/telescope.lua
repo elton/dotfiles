@@ -36,6 +36,9 @@ function M.setup()
 					-- even more opts
 				}),
 			},
+			media_files = {
+				filetypes = { "png", "jpg", "mp4", "webm", "pdf", "gif" },
+			},
 		},
 	})
 

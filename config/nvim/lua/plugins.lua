@@ -286,7 +286,13 @@ function M.setup()
 		-- use("Pocco81/DAPInstall.nvim")
 		-- use("jbyuki/one-small-step-for-vimkind")
 
-		use("j-hui/fidget.nvim")
+		use({
+			"j-hui/fidget.nvim",
+			event = "BufReadPre",
+			config = function()
+				require("fidget").setup({})
+			end,
+		})
 		if paccker_bootstrap then
 			print("Setting up Neovim. Restart required after installation!")
 			require("packer").sync()

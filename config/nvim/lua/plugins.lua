@@ -35,7 +35,11 @@ function M.setup()
 
 	-- packer.nvim configuration
 	local conf = {
-		-- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
+		profile = {
+			enable = true,
+			threshold = 0, -- the amount in ms that a plugins load time must be over for it to be included in the profile
+		},
+		compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
 		-- 并发数限制
 		max_jobs = 16,
 		-- 以浮动窗口打开安装列表
@@ -238,6 +242,7 @@ function M.setup()
 		-- git
 		use({
 			"TimUntersberger/neogit",
+			cmd = "Neogit",
 			requires = "nvim-lua/plenary.nvim",
 			config = function()
 				require("config.neogit").setup()

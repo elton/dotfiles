@@ -1,45 +1,39 @@
 local M = {}
--- 自动安装 Packer.nvim
--- 插件安装目录
--- ~/.local/share/nvim/site/pack/packer/
-local paccker_bootstrap
-local function packer_init()
-	local fn = vim.fn
-	local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-	if fn.empty(fn.glob(install_path)) > 0 then
-		vim.notify("正在安装Pakcer.nvim，请稍后...")
-		paccker_bootstrap = fn.system({
-			"git",
-			"clone",
-			"--depth",
-			"1",
-			"https://github.com/wbthomason/packer.nvim",
-			-- "https://gitcode.net/mirrors/wbthomason/packer.nvim",
-			install_path,
-		})
-		vim.cmd([[packadd packer.nvim]])
-
-		-- https://github.com/wbthomason/packer.nvim/issues/750
-		local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
-		if not string.find(vim.o.runtimepath, rtp_addition) then
-			vim.o.runtimepath = rtp_addition .. "," .. vim.o.runtimepath
-		end
-		vim.notify("Pakcer.nvim 安装完毕")
-	end
-	vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
-end
-
-packer_init()
 
 function M.setup()
-	-- Use a protected call so we don't error out on first use
-	local status_ok, packer = pcall(require, "packer")
-	if not status_ok then
-		vim.notify("没有安装 packer.nvim")
-		return
+	local paccker_bootstrap
+
+	local function packer_init()
+		local fn = vim.fn
+		-- 自动安装 Packer.nvim
+		-- 插件安装目录
+		-- ~/.local/share/nvim/site/pack/packer/start
+		local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+
+		if fn.empty(fn.glob(install_path)) > 0 then
+			vim.notify("正在安装Pakcer.nvim，请稍后...")
+			paccker_bootstrap = fn.system({
+				"git",
+				"clone",
+				"--depth",
+				"1",
+				"https://github.com/wbthomason/packer.nvim",
+				-- "https://gitcode.net/mirrors/wbthomason/packer.nvim",
+				install_path,
+			})
+			vim.cmd([[packadd packer.nvim]])
+
+			-- https://github.com/wbthomason/packer.nvim/issues/750
+			local rtp_addition = vim.fn.stdpath("data") .. "/site/pack/*/start/*"
+			if not string.find(vim.o.runtimepath, rtp_addition) then
+				vim.o.runtimepath = rtp_addition .. "," .. vim.o.runtimepath
+			end
+			vim.notify("Pakcer.nvim 安装完毕")
+		end
+		vim.cmd("autocmd BufWritePost plugins.lua source <afile> | PackerCompile")
 	end
 
+	-- packer.nvim configuration
 	local conf = {
 		-- compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
 		-- 并发数限制
@@ -144,7 +138,16 @@ function M.setup()
 			end,
 		})
 		-- treesitter
-		use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			as = "nvim-treesitter",
+			event = "BufRead",
+			opt = true,
+			run = ":TSUpdate",
+			config = function()
+				require("config.treesitter").setup()
+			end,
+		})
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
 		use("lukas-reineke/indent-blankline.nvim")
@@ -157,24 +160,62 @@ function M.setup()
 		--------------------- LSP --------------------
 		use({ "williamboman/nvim-lsp-installer" })
 		-- Lspconfig
-		use({ "neovim/nvim-lspconfig" })
+		use({
+			"neovim/nvim-lspconfig",
+			as = "nvim-lspconfig",
+			after = "nvim-treesitter",
+			opt = true,
+			config = function()
+				require("config.lsp").setup()
+				-- require("config.dap").setup()
+			end,
+		})
+		use({ "ray-x/lsp_signature.nvim" })
 
+		use({
+			"hrsh7th/nvim-cmp",
+			-- event = "InsertEnter",
+			-- opt = true,
+			requires = {
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-nvim-lsp",
+				-- "quangnguyen30192/cmp-nvim-ultisnips",
+				"hrsh7th/vim-vsnip",
+				"hrsh7th/cmp-nvim-lua",
+				"octaltree/cmp-look",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-calc",
+				"f3fora/cmp-spell",
+				"hrsh7th/cmp-emoji",
+				"ray-x/cmp-treesitter",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lsp-document-symbol",
+			},
+			config = function()
+				require("config.lsp.cmp").setup()
+			end,
+		})
 		-- 补全引擎
-		use("hrsh7th/nvim-cmp")
-		-- snippet 引擎
-		use("hrsh7th/vim-vsnip")
-		-- 补全源
-		use("hrsh7th/cmp-vsnip")
-		use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
-		use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
-		use("hrsh7th/cmp-path") -- { name = 'path' }
-		use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
-		use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
+		-- use("hrsh7th/nvim-cmp")
+		-- -- snippet 引擎
+		-- use("hrsh7th/vim-vsnip")
+		-- -- 补全源
+		-- use("hrsh7th/cmp-vsnip")
+		-- use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
+		-- use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
+		-- use("hrsh7th/cmp-path") -- { name = 'path' }
+		-- use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
+		-- use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
 
 		-- 常见编程语言代码段
 		use("rafamadriz/friendly-snippets")
 		-- ui
-		use("onsails/lspkind-nvim")
+		use({
+			"onsails/lspkind-nvim",
+			config = function()
+				require("lspkind").init()
+			end,
+		})
 		use("tami5/lspsaga.nvim")
 		-- 代码格式化
 		use({ "jose-elias-alvarez/null-ls.nvim", requires = "nvim-lua/plenary.nvim" })
@@ -205,7 +246,7 @@ function M.setup()
 		use({
 			"lewis6991/gitsigns.nvim",
 			config = function()
-				require("gitsigns").setup()
+				require("config.gitsigns").setup()
 			end,
 		})
 		use({
@@ -229,8 +270,17 @@ function M.setup()
 		use("j-hui/fidget.nvim")
 		if paccker_bootstrap then
 			print("Setting up Neovim. Restart required after installation!")
-			packer.sync()
+			require("packer").sync()
 		end
+	end
+
+	packer_init()
+
+	-- Use a protected call so we don't error out on first use
+	local status_ok, packer = pcall(require, "packer")
+	if not status_ok then
+		vim.notify("没有安装 packer.nvim")
+		return
 	end
 
 	pcall(require, "impatient")

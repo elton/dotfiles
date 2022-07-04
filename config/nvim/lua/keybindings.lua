@@ -21,6 +21,11 @@ vim.g.maplocalleader = " "
 
 -- Press jl fast to enter
 map("i", "jk", "<ESC>", opt)
+map("t", "jk", "<C-\\><C-n>", opt)
+
+-- Center search results
+map("n", "n", "nzz", opt)
+map("n", "N", "Nzz", opt)
 
 -- $跳到行尾不带空格 (交换$ 和 g_)
 map("v", "$", "g_", opt)

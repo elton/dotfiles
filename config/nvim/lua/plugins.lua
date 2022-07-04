@@ -70,6 +70,7 @@ function M.setup()
 		-- WhichKey
 		use({
 			"folke/which-key.nvim",
+			event = "VimEnter",
 			config = function()
 				require("config.whichkey").setup()
 			end,
@@ -154,7 +155,7 @@ function M.setup()
 		})
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
-		use("lukas-reineke/indent-blankline.nvim")
+		use({ "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" })
 		-- show color
 		use("norcalli/nvim-colorizer.lua")
 		-- wakatime

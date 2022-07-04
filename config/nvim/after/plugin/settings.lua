@@ -39,7 +39,9 @@ function M.auto_cmds()
 	autocmd("BufWritePre", {
 		group = myAutoGroup,
 		pattern = { "*.lua", "*.py", "*.go", "*.js", "*.java", "*.rs" },
-		callback = vim.lsp.buf.format({ async = true }),
+		callback = function()
+			vim.lsp.buf.format({ async = true })
+		end,
 	})
 
 	-- 修改lua/plugins.lua 自动更新插件

@@ -157,7 +157,12 @@ function M.setup()
 		})
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
-		use({ "lukas-reineke/indent-blankline.nvim" })
+		use({
+			"lukas-reineke/indent-blankline.nvim",
+			config = function()
+				require("config.indent-blankline")
+			end,
+		})
 		-- show color
 		use("norcalli/nvim-colorizer.lua")
 		-- wakatime
@@ -181,8 +186,8 @@ function M.setup()
 
 		use({
 			"hrsh7th/nvim-cmp",
-			-- event = "InsertEnter",
-			-- opt = true,
+			event = "InsertEnter",
+			opt = true,
 			requires = {
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-nvim-lsp",
@@ -237,9 +242,15 @@ function M.setup()
 		-------------------------------------------------------
 		use({ "akinsho/toggleterm.nvim" })
 		-- surround
-		use("ur4ltz/surround.nvim")
+		use({ "tpope/vim-surround", event = "BufRead" })
 		-- Comment
-		use("numToStr/Comment.nvim")
+		use({
+			"numToStr/Comment.nvim",
+			keys = { "gc", "gcc", "gbc" },
+			config = function()
+				require("config.comment").setup()
+			end,
+		})
 		-- nvim-autopairs
 		use("windwp/nvim-autopairs")
 		-- git

@@ -114,6 +114,8 @@ function M.setup()
 		use("nvim-lua/popup.nvim")
 		use({
 			"nvim-telescope/telescope.nvim",
+			module = "telescope",
+			as = "telescope",
 			requires = {
 				"nvim-lua/plenary.nvim",
 				"LinArcX/telescope-env.nvim",
@@ -155,7 +157,7 @@ function M.setup()
 		})
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
-		use({ "lukas-reineke/indent-blankline.nvim", event = "BufReadPre" })
+		use({ "lukas-reineke/indent-blankline.nvim" })
 		-- show color
 		use("norcalli/nvim-colorizer.lua")
 		-- wakatime

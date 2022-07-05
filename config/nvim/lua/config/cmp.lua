@@ -23,7 +23,6 @@ function M.setup()
 		return vim.api.nvim_replace_termcodes(str, true, true, true)
 	end
 
-	local cmp_ultisnips_mappings = require("cmp_nvim_ultisnips.mappings")
 	cmp.setup({
 		formatting = {
 			format = require("lspkind").cmp_format({
@@ -98,52 +97,52 @@ function M.setup()
 				behavior = cmp.ConfirmBehavior.Replace,
 				select = true,
 			}),
-			-- ["<C-Space>"] = cmp.mapping({
-			-- 	i = function(fallback)
-			-- 		if cmp.visible() then
-			-- 			if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
-			-- 				return press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
-			-- 			end
-			-- 			cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
-			-- 		elseif has_any_words_before() then
-			-- 			press("<Space>")
-			-- 		else
-			-- 			fallback()
-			-- 		end
-			-- 	end,
-			-- 	c = function()
-			-- 		if cmp.visible() then
-			-- 			cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
-			-- 		else
-			-- 			vim.api.nvim_feedkeys(t("<Down>"), "n", true)
-			-- 		end
-			-- 	end,
-			-- }),
-			-- ["<Tab>"] = cmp.mapping(function(fallback)
-			--   if cmp.visible() then
-			--     cmp.select_next_item()
-			--   elseif vim.fn["vsnip#available"](1) == 1 then
-			--     feedkey("<Plug>(vsnip-expand-or-jump)", "")
-			--   elseif has_words_before() then
-			--     cmp.complete()
-			--   else
-			--     fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-			--   end
-			-- end, {
-			--   "i",
-			--   "s",
-			-- }),
-			--
-			-- ["<S-Tab>"] = cmp.mapping(function()
-			--   if cmp.visible() then
-			--     cmp.select_prev_item()
-			--   elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-			--     feedkey("<Plug>(vsnip-jump-prev)", "")
-			--   end
-			-- end, {
-			--   "i",
-			--   "s",
-			-- }),
+			["<C-Space>"] = cmp.mapping({
+				i = function(fallback)
+					if cmp.visible() then
+						if vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
+							return press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
+						end
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
+					elseif has_any_words_before() then
+						press("<Space>")
+					else
+						fallback()
+					end
+				end,
+				c = function()
+					if cmp.visible() then
+						cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace })
+					else
+						vim.api.nvim_feedkeys(t("<Down>"), "n", true)
+					end
+				end,
+			}),
+			["<Tab>"] = cmp.mapping(function(fallback)
+				if cmp.visible() then
+					cmp.select_next_item()
+				elseif vim.fn["vsnip#available"](1) == 1 then
+					feedkey("<Plug>(vsnip-expand-or-jump)", "")
+				elseif has_words_before() then
+					cmp.complete()
+				else
+					fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+				end
+			end, {
+				"i",
+				"s",
+			}),
+
+			["<S-Tab>"] = cmp.mapping(function()
+				if cmp.visible() then
+					cmp.select_prev_item()
+				elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+					feedkey("<Plug>(vsnip-jump-prev)", "")
+				end
+			end, {
+				"i",
+				"s",
+			}),
 			-- ["<Tab>"] = cmp.mapping(function(fallback)
 			-- 	if cmp.get_selected_entry() == nil and vim.fn["UltiSnips#CanExpandSnippet"]() == 1 then
 			-- 		press("<C-R>=UltiSnips#ExpandSnippet()<CR>")
@@ -180,29 +179,12 @@ function M.setup()
 			-- 	"s",
 			-- 	"c",
 			-- }),
-			-- recommended configuration for <Tab> people:
-			["<Tab>"] = cmp.mapping(function(fallback)
-				cmp_ultisnips_mappings.expand_or_jump_forwards(fallback)
-			end, {
-				"i",
-				"s", --[[ "c" (to enable the mapping in command mode) ]]
-			}),
-			["<S-Tab>"] = cmp.mapping(function(fallback)
-				cmp_ultisnips_mappings.jump_backwards(fallback)
-			end, {
-				"i",
-				"s", --[[ "c" (to enable the mapping in command mode) ]]
-			}),
 		},
 		snippet = {
 			expand = function(args)
-				vim.fn["UltiSnips#Anon"](args.body)
-				-- vim.fn["vsnip#anonymous"](args.body)
+				-- vim.fn["UltiSnips#Anon"](args.body)
+				vim.fn["vsnip#anonymous"](args.body)
 			end,
-			window = {
-				completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
-			},
 		},
 		sources = {
 			{ name = "nvim_lsp", max_item_count = 10 },
@@ -221,12 +203,12 @@ function M.setup()
 			-- { name = "spell" },
 			-- { name = "cmp_tabnine" },
 		},
-		-- completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
+		completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
+
 		experimental = { native_menu = false, ghost_text = false },
-		-- documentation = {
-		-- 	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-		-- },
+		docmentation = cmp.config.window.bordered(),
 	})
+
 	-- If you want insert `(` after select function or method item
 	-- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 	-- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
@@ -255,13 +237,13 @@ function M.setup()
 	})
 
 	-- Database completion
-	-- vim.api.nvim_exec(
-	-- 	[[
-	--        " autocmd! FileType sql setlocal omnifunc=vim_dadbod_completion#omni
-	--        autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
-	--    ]],
-	-- 	false
-	-- )
+	vim.api.nvim_exec(
+		[[
+        " autocmd! FileType sql setlocal omnifunc=vim_dadbod_completion#omni
+        autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
+    ]],
+		false
+	)
 end
 
 return M

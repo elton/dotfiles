@@ -165,8 +165,9 @@ function M.setup()
 		-- show color
 		use({
 			"norcalli/nvim-colorizer.lua",
+			cmd = "ColorizerToggle",
 			config = function()
-				require("config.nvim-colorizer").setup()
+				require("colorizer").setup()
 			end,
 		})
 		-- wakatime
@@ -195,7 +196,15 @@ function M.setup()
 			requires = {
 				"hrsh7th/cmp-buffer",
 				"hrsh7th/cmp-nvim-lsp",
-				-- "quangnguyen30192/cmp-nvim-ultisnips",
+				-- {
+				-- 	"quangnguyen30192/cmp-nvim-ultisnips",
+				-- 	config = function()
+				-- 		-- optional call to setup (see customization section)
+				-- 		require("cmp_nvim_ultisnips").setup({})
+				-- 	end,
+				-- 	-- If you want to enable filetype detection based on treesitter:
+				-- 	-- requires = { "nvim-treesitter/nvim-treesitter" },
+				-- },
 				"hrsh7th/vim-vsnip",
 				"hrsh7th/cmp-nvim-lua",
 				"octaltree/cmp-look",
@@ -208,20 +217,9 @@ function M.setup()
 				"hrsh7th/cmp-nvim-lsp-document-symbol",
 			},
 			config = function()
-				require("config.lsp.cmp").setup()
+				require("config.cmp").setup()
 			end,
 		})
-		-- 补全引擎
-		-- use("hrsh7th/nvim-cmp")
-		-- -- snippet 引擎
-		-- use("hrsh7th/vim-vsnip")
-		-- -- 补全源
-		-- use("hrsh7th/cmp-vsnip")
-		-- use("hrsh7th/cmp-nvim-lsp") -- { name = nvim_lsp }
-		-- use("hrsh7th/cmp-buffer") -- { name = 'buffer' },
-		-- use("hrsh7th/cmp-path") -- { name = 'path' }
-		-- use("hrsh7th/cmp-cmdline") -- { name = 'cmdline' }
-		-- use("hrsh7th/cmp-nvim-lsp-signature-help") -- { name = 'nvim_lsp_signature_help' }
 
 		-- 常见编程语言代码段
 		use("rafamadriz/friendly-snippets")

@@ -57,14 +57,13 @@ function M.setup()
 		use("wbthomason/packer.nvim")
 
 		--------------------- colorschemes --------------------
-		-- tokyonight
-		use("folke/tokyonight.nvim")
 		-- nord
-		use("shaunsingh/nord.nvim")
-		-- nightfox
-		use("EdenEast/nightfox.nvim")
-		-- everforest
-		use("sainnhe/everforest")
+		use({
+			"shaunsingh/nord.nvim",
+			config = function()
+				vim.cmd([[colorscheme nord]])
+			end,
+		})
 
 		--------------------- plugins -------------------------
 		-- WhichKey
@@ -164,7 +163,12 @@ function M.setup()
 			end,
 		})
 		-- show color
-		use("norcalli/nvim-colorizer.lua")
+		use({
+			"norcalli/nvim-colorizer.lua",
+			config = function()
+				require("config.nvim-colorizer").setup()
+			end,
+		})
 		-- wakatime
 		use("wakatime/vim-wakatime")
 		-- Copilot
@@ -252,7 +256,13 @@ function M.setup()
 			end,
 		})
 		-- nvim-autopairs
-		use("windwp/nvim-autopairs")
+		use({
+			"windwp/nvim-autopairs",
+			run = "make",
+			config = function()
+				require("nvim-autopairs").setup({})
+			end,
+		})
 		-- git
 		use({
 			"TimUntersberger/neogit",

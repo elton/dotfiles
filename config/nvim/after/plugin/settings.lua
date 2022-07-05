@@ -40,7 +40,7 @@ function M.auto_cmds()
 		group = myAutoGroup,
 		pattern = { "*.lua", "*.py", "*.go", "*.js", "*.java", "*.rs" },
 		callback = function()
-			vim.lsp.buf.format({ async = true })
+			vim.lsp.buf.format()
 		end,
 	})
 

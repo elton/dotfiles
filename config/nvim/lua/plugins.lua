@@ -153,6 +153,15 @@ function M.setup()
 			config = function()
 				require("config.treesitter").setup()
 			end,
+			requires = {
+				{
+					"windwp/nvim-autopairs",
+					run = "make",
+					config = function()
+						require("nvim-autopairs").setup({})
+					end,
+				},
+			},
 		})
 		use("p00f/nvim-ts-rainbow")
 		-- indent-blankline
@@ -254,13 +263,13 @@ function M.setup()
 			end,
 		})
 		-- nvim-autopairs
-		use({
-			"windwp/nvim-autopairs",
-			run = "make",
-			config = function()
-				require("nvim-autopairs").setup({})
-			end,
-		})
+		-- use({
+		-- 	"windwp/nvim-autopairs",
+		-- 	run = "make",
+		-- 	config = function()
+		-- 		require("nvim-autopairs").setup({})
+		-- 	end,
+		-- })
 		-- git
 		use({
 			"TimUntersberger/neogit",
